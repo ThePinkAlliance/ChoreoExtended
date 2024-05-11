@@ -45,6 +45,9 @@ dependencies {
     implementation 'edu.wpi.first.cscore:cscore-java:2024.3.2'
     implementation 'edu.wpi.first.ntcore:ntcore-java:2024.3.2'
     implementation 'edu.wpi.first.wpimath:wpimath-java:2024.3.2'
+    implementation 'edu.wpi.first.wpiunits:wpiunits-java:2024.3.2'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     // pheonix six
     implementation 'com.ctre.phoenix6:wpiapi-java:24.1.0'
@@ -62,8 +65,13 @@ java {
 }
 
 jar {
+  // Allows example project to build first before root project.   
+  dependsOn(':examples:BasicProject:jar')
+
   def env = System.getenv("JITPACK")
 }
+
+
 
 publishing {
     publications {
