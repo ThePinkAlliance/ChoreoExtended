@@ -9,6 +9,8 @@ import java.util.function.Consumer;
 
 import com.google.common.base.Supplier;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.ReflectionAccessFilter;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -20,7 +22,9 @@ import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class ChoreoExtended {
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(EventCommandData[].class, new Deserializer())
+            .create();
 
     /** Default constructor. */
     public ChoreoExtended() {

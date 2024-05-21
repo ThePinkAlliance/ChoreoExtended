@@ -1,3 +1,5 @@
+// Copyright (C) ThePinkAlliance Contributors
+
 package com.ThePinkAlliance.ChoreoExtended;
 
 public class IndividualEventCommand {

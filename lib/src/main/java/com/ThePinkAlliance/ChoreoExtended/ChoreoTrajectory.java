@@ -9,7 +9,7 @@ import java.util.List;
 /** A trajectory loaded from Choreo. */
 public class ChoreoTrajectory {
     private final List<ChoreoTrajectoryState> samples;
-    private EventMarker eventMarkers;
+    private List<EventMarker> eventMarkers;
 
     /** Create an empty ChoreoTrajectory. */
     public ChoreoTrajectory() {
@@ -41,6 +41,10 @@ public class ChoreoTrajectory {
      */
     public ChoreoTrajectoryState getFinalState() {
         return samples.get(samples.size() - 1);
+    }
+
+    public List<EventMarker> getEvents() {
+        return this.eventMarkers;
     }
 
     private ChoreoTrajectoryState sampleInternal(double timestamp) {

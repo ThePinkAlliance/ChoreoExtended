@@ -1,19 +1,22 @@
 package com.ThePinkAlliance.ChoreoExtended;
 
-import java.util.List;
-
 public class EventCommandData {
-    private List<IndividualEventCommand> commands;
+    private String type;
     private String name;
 
     public EventCommandData() {
     }
 
-    public String getName() {
-        return this.name;
+    public EventCommandData(String type, String name) {
+        this.name = name;
+        this.type = type;
     }
 
-    public List<IndividualEventCommand> getCommands() {
-        return this.commands;
+    public String getType() {
+        return this.type;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }
