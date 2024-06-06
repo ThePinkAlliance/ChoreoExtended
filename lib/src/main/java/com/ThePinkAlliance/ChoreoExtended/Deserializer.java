@@ -9,12 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
-
 public class Deserializer implements JsonDeserializer<EventCommandData[]> {
-
     @Override
     public EventCommandData[] deserialize(JsonElement json, Type type, JsonDeserializationContext context)
             throws JsonParseException {
@@ -27,22 +22,14 @@ public class Deserializer implements JsonDeserializer<EventCommandData[]> {
         if (using_chained_commands) {
             JsonArray commands = event_data.get("commands").getAsJsonArray();
 
-            ArrayList<EventCommandData> populated_list = new ArrayList<>();
-            for (var c : commands) {
-                JsonObject command = c.getAsJsonObject();
+            EventCommandData[] temp_list = new EventCommandData[commands.size()];
+            for (int i = 0; i < commands.size(); i++) {
+                JsonObject command = commands.get(i).getAsJsonObject();
                 JsonObject command_data = command.get("data").getAsJsonObject();
                 String command_type = command.get("type").getAsString();
                 String command_name = command_data.get("name").getAsString();
 
-                populated_list.add(new EventCommandData(command_type, command_name));
-            }
-
-            EventCommandData[] temp_list = new EventCommandData[populated_list.size()];
-
-            for (int i = 0; i < populated_list.size(); i++) {
-                EventCommandData element = populated_list.get(i);
-
-                temp_list[i] = element;
+                temp_list[i] = new EventCommandData(command_type, command_name);
             }
 
             list = temp_list;
