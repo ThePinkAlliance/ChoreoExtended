@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.ThePinkAlliance.ChoreoExtended.ChoreoExtended;
 import com.ThePinkAlliance.ChoreoExtended.EventCommandData;
 import com.ThePinkAlliance.ChoreoExtended.EventMarker;
+import com.ThePinkAlliance.ChoreoExtended.EventScheduler;
 import edu.wpi.first.hal.HAL;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

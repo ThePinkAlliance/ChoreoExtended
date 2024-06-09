@@ -135,6 +135,7 @@ public class ChoreoExtended {
             PIDController rotationController,
             Consumer<ChassisSpeeds> outputChassisSpeeds,
             BooleanSupplier mirrorTrajectory,
+            Consumer<Double> schedulerConsumer,
             Subsystem... requirements) {
         return choreoSwerveCommand(
                 trajectory,
@@ -142,6 +143,7 @@ public class ChoreoExtended {
                 choreoSwerveController(xController, yController, rotationController),
                 outputChassisSpeeds,
                 mirrorTrajectory,
+                schedulerConsumer,
                 requirements);
     }
 
@@ -182,12 +184,14 @@ public class ChoreoExtended {
             ChoreoControlFunction controller,
             Consumer<ChassisSpeeds> outputChassisSpeeds,
             BooleanSupplier mirrorTrajectory,
+            Consumer<Double> schedulerConsumer,
             Subsystem... requirements) {
         var timer = new Timer();
         return new FunctionalCommand(
                 timer::restart,
                 () -> {
                     ;
+                    schedulerConsumer.accept(timer.get());
                     outputChassisSpeeds.accept(
                             controller.apply(
                                     poseSupplier.get(),
