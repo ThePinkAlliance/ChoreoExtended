@@ -5,33 +5,30 @@ import edu.wpi.first.wpilibj.Timer;
 public class LoopingAction extends Action {
     private Runnable runnable;
     private double startTime;
-    private double endTime;
+    private double duration;
 
-    public LoopingAction(Runnable runnable, double startTime, double duration) {
+    public LoopingAction(String name, double duration, Runnable runnable) {
+        super(name);
+
         this.runnable = runnable;
-        this.startTime = startTime;
-        this.endTime = startTime + duration;
-    }
+        this.duration = duration;
 
-    @Override
-    public double getStartTime() {
-        return startTime;
-    }
-
-    @Override
-    public double getEndTime() {
-        return endTime;
+        this.startTime = -1;
     }
 
     @Override
     public void cleanup() {
-
+        this.startTime = -1;
     }
 
     @Override
     public void run() {
-        double currentTime = Timer.getFPGATimestamp();
-        boolean expired = currentTime >= endTime;
+        if (startTime == -1) {
+            this.startTime = Timer.getFPGATimestamp();
+        }
+
+        double currentTime = Timer.getFPGATimestamp() - this.startTime;
+        boolean expired = currentTime >= this.duration;
 
         if (!this.isComplete() && !expired) {
             runnable.run();

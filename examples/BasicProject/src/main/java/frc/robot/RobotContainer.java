@@ -4,11 +4,20 @@
 
 package frc.robot;
 
+import java.util.List;
+
+import com.ThePinkAlliance.ChoreoExtended.ChoreoExtended;
+import com.ThePinkAlliance.ChoreoExtended.ChoreoTrajectory;
+import com.ThePinkAlliance.ChoreoExtended.EventScheduler;
+import com.ThePinkAlliance.ChoreoExtended.actions.InstantAction;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
 public class RobotContainer {
+    EventScheduler scheduler;
+
     public RobotContainer() {
+        this.scheduler = new EventScheduler();
 
         configureBindings();
     }
@@ -17,6 +26,14 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        return Commands.print("No autonomous command configured");
+        ChoreoTrajectory traj = ChoreoExtended.getTrajectory("OneEvent");
+
+        var action_one = new InstantAction(() -> {
+            System.out.println("Hello!!");
+        }, "test");
+
+        scheduler.loadEvents(traj.getEvents(), List.of(action_one));
+
+        return Commands.none();
     }
 }
