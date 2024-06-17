@@ -14,5 +14,5 @@ import java.util.function.BiFunction;
  * robot-relative ChassisSpeeds for the robot.
  */
 public interface ChoreoControlFunction
-        extends BiFunction<Pose2d, ChoreoTrajectoryState, ChassisSpeeds> {
+    extends BiFunction<Pose2d, ChoreoTrajectoryState, ChassisSpeeds> {
 }
