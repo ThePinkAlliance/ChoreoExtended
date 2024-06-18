@@ -5,10 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Deque;
 import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
 
 import com.ThePinkAlliance.ChoreoExtended.actions.Action;
 import com.ThePinkAlliance.ChoreoExtended.actions.ConstructedAction;
@@ -43,6 +41,13 @@ public class EventScheduler {
     return new ConstructedAction(action.getName(), timestamp, action);
   }
 
+  /**
+   * Binds all the trajectory event markers with the defined actions based on
+   * name.
+   * 
+   * @param eventMarkers chroeo defined events.
+   * @param actions      program defined actions.
+   */
   public void loadEvents(List<EventMarker> eventMarkers, List<Action> actions) {
     Collections.sort(eventMarkers, Comparator.comparingDouble(e -> e.getTimestamp()));
 
