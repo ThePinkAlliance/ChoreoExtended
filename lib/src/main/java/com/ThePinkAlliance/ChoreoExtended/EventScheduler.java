@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Deque;
+import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 import com.ThePinkAlliance.ChoreoExtended.actions.Action;
@@ -74,7 +75,7 @@ public class EventScheduler {
    * 
    * @param getTimestamp
    */
-  public void run(Supplier<Double> getTimestamp) {
+  public void run(DoubleSupplier getTimestamp) {
     if (actions == null || markers == null) {
       throw new Error("Please call EventScheduler.loadEvents");
     }
@@ -87,11 +88,11 @@ public class EventScheduler {
 
     Action nextAction = nextConstructedAction.getAction();
 
-    double currentTime = getTimestamp.get();
+    double currentTime = getTimestamp.getAsDouble();
     double activationTime = nextConstructedAction.getTimestamp();
     boolean activate = (activationTime - currentTime) < 0.0125; // seconds
 
-    System.out.println(nextConstructedAction.getTimestamp() - getTimestamp.get());
+    System.out.println(nextConstructedAction.getTimestamp() - currentTime);
 
     if (activate && !nextAction.isComplete()) {
       nextAction.run();

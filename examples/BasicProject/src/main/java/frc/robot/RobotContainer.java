@@ -10,30 +10,37 @@ import com.ThePinkAlliance.ChoreoExtended.ChoreoExtended;
 import com.ThePinkAlliance.ChoreoExtended.ChoreoTrajectory;
 import com.ThePinkAlliance.ChoreoExtended.EventScheduler;
 import com.ThePinkAlliance.ChoreoExtended.actions.InstantAction;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.subsystems.SwerveSubsystem;
 
 public class RobotContainer {
-    EventScheduler scheduler;
+  SwerveSubsystem swerveSubsystem;
+  EventScheduler scheduler;
 
-    public RobotContainer() {
-        this.scheduler = new EventScheduler();
+  public RobotContainer() {
+    this.scheduler = new EventScheduler();
+    this.swerveSubsystem = new SwerveSubsystem(Constants.DriveConstants.kDriveKinematics);
 
-        configureBindings();
-    }
+    configureBindings();
+  }
 
-    private void configureBindings() {
-    }
+  private void configureBindings() {
+  }
 
-    public Command getAutonomousCommand() {
-        ChoreoTrajectory traj = ChoreoExtended.getTrajectory("OneEvent");
+  public Command getAutonomousCommand() {
+    ChoreoTrajectory traj = ChoreoExtended.getTrajectory("OneEvent");
 
-        var action_one = new InstantAction(() -> {
-            System.out.println("Hello!!");
-        }, "test");
+    var action_one = new InstantAction(() -> {
+      System.out.println("Hello!!");
+    }, "test");
 
-        scheduler.loadEvents(traj.getEvents(), List.of(action_one));
+    scheduler.loadEvents(traj.getEvents(), List.of(action_one));
 
-        return Commands.none();
-    }
+    return ChoreoExtended.choreoSwerveCommand(traj, swerveSubsystem::getCurrentPose,
+        ChoreoExtended.choreoSwerveController(new PIDController(0, 0, 0), new PIDController(0, 0, 0),
+            new PIDController(0, 0, 0)),
+        swerveSubsystem::setStates, () -> false, scheduler::run, swerveSubsystem);
+  }
 }
