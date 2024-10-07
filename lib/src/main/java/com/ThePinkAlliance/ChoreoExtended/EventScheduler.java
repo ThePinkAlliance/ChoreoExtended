@@ -97,8 +97,6 @@ public class EventScheduler {
     double activationTime = nextConstructedAction.getTimestamp();
     boolean activate = (activationTime - currentTime) < 0.0125; // seconds
 
-    System.out.println(nextConstructedAction.getTimestamp() - currentTime);
-
     if (activate && !nextAction.isComplete()) {
       nextAction.run();
     } else if (nextAction.isComplete()) {
