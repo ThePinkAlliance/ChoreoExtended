@@ -36,3 +36,23 @@ var looping_action = new LoopingAction(() -> {
 
 ## Action Cleanup
 
+This is a looping action with a custom cleanup method. The `ExtendableLoopingAction` was created specificly in order to allow for custom cleanup functions.
+
+```java
+public class CustomAction extends ExtendableLoopingAction {
+  public CustomAction() {
+    // Connected to "custom-action" with duration of 1 second.
+    super("custom-action", 1);
+  }
+
+  @Override
+  public void execute() {
+    // Execute motors and read sensors.
+  }
+
+  @Override
+  public void exit() {
+    // Stop motors and cleanup
+  }
+}
+```

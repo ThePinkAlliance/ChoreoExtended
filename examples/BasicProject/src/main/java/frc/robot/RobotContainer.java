@@ -10,6 +10,7 @@ import com.ThePinkAlliance.ChoreoExtended.ChoreoExtended;
 import com.ThePinkAlliance.ChoreoExtended.ChoreoTrajectory;
 import com.ThePinkAlliance.ChoreoExtended.EventScheduler;
 import com.ThePinkAlliance.ChoreoExtended.actions.InstantAction;
+import com.ThePinkAlliance.ChoreoExtended.actions.LoopingAction;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -34,6 +35,10 @@ public class RobotContainer {
     var action_one = new InstantAction(() -> {
       System.out.println("Hello!!");
     }, "test");
+
+    var looping_action = new LoopingAction(() -> {
+      System.out.println("Looping Action!!");
+    }, 1, "action-one");
 
     scheduler.loadEvents(traj.getEvents(), List.of(action_one));
 
