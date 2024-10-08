@@ -2,23 +2,32 @@ package com.ThePinkAlliance.ChoreoExtended.actions;
 
 import edu.wpi.first.wpilibj.Timer;
 
-public class LoopingAction extends Action {
-  private Runnable runnable;
+public abstract class ExtendableLoopingAction extends Action {
   private double startTime;
   private double duration;
 
-  public LoopingAction(Runnable runnable, double duration, String name) {
+  public ExtendableLoopingAction(String name, double duration) {
     super(name);
 
-    this.runnable = runnable;
-    this.duration = duration;
-
     this.startTime = -1;
+    this.duration = duration;
   }
+
+  /**
+   * This executes repeadly during the action duration.
+   */
+  public abstract void execute();
+
+  /**
+   * This is the cleanup function that will execute when the action is complete.
+   */
+  public abstract void exit();
 
   @Override
   public void cleanup() {
     this.startTime = -1;
+
+    exit();
   }
 
   @Override
@@ -31,9 +40,10 @@ public class LoopingAction extends Action {
     boolean expired = currentTime >= this.duration;
 
     if (!this.isComplete() && !expired) {
-      runnable.run();
+      execute();
     } else {
       setComplete(true);
     }
   }
+
 }
