@@ -10,14 +10,11 @@ public class CustomActionTwo extends ExtendableInstantAction {
 
   @Override
   public void execute() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'execute'");
+    // Execute motors and read sensors.
   }
 
   @Override
   public void exit() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'exit'");
+    // Stop motors and cleanup
   }
-
 }
