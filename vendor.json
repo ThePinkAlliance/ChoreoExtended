@@ -9,7 +9,7 @@
 		"https://maven.revrobotics.com/",
 		"https://maven.ctr-electronics.com/release/"
 	],
-	"jsonUrl": "https://raw.githubusercontent.com/ThePinkAlliance/choreo-extended/main/vendor.json",
+	"jsonUrl": "https://raw.githubusercontent.com/ThePinkAlliance/ChoreoExtended/main/vendor.json",
 	"javaDependencies": [
 		{
 			"groupId": "com.github.ThePinkAlliance",
