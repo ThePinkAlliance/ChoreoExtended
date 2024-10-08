@@ -1,7 +1,8 @@
 {
 	"fileName": "vendor.json",
 	"name": "ThePinkAlliance",
-	"version": "0.0.5",
+	"version": "0.1.6",
+	"frcYear": "2024",
 	"uuid": "9619F7EA-7F96-4236-9D94-02338DFED572",
 	"mavenUrls": [
 		"https://jitpack.io",
@@ -12,8 +13,8 @@
 	"javaDependencies": [
 		{
 			"groupId": "com.github.ThePinkAlliance",
-			"artifactId": "choreo-extended",
-			"version": "0.0.5"
+			"artifactId": "ChoreoExtended",
+			"version": "0.1.6"
 		}
 	],
 	"jniDependencies": [],
