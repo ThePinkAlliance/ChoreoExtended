@@ -1,4 +1,4 @@
-# ChoreoExtended
+# ChoreoExtended (DISCONTINUED)
 
 A trajectory event library super charging choreo with reliable events.
 
